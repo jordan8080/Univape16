@@ -1,0 +1,150 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #fff;
+
+  .navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+
+    a {
+      text-decoration: none;
+      color: #ff5722; /* Couleur vive pour attirer l'œil */
+      display: inline-block;
+      transition: color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        color: #ff9100; /* Couleur plus vive au survol */
+        transform: scale(1.1); /* Légère augmentation de taille */
+      }
+    }
+
+    /* Effet sous la marque */
+    a::after {
+      content: '';
+      display: block;
+      height: 4px;
+      width: 0%;
+      background: #ff9100;
+      margin: 5px auto 0 auto;
+      transition: width 0.3s ease;
+    }
+
+    a:hover::after {
+      width: 100%; /* Barre qui s'étend sous le texte */
+    }
+
+    /* Optionnel : animation d'entrée */
+    a {
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+  .navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+
+    a {
+      text-decoration: none;
+      color: green;
+      display: inline-block;
+      transition: color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        color: lightgreen;
+        transform: scale(1.1);
+      }
+    }
+
+    a::after {
+      content: '';
+      display: block;
+      height: 4px;
+      width: 0%;
+      background: lightgreen;
+      margin: 5px auto 0 auto;
+      transition: width 0.3s ease;
+    }
+
+    a:hover::after {
+      width: 100%;
+    }
+
+
+    a {
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+
+    li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #fff;
+  }
+}
+
+.navbar-dropdown {
+  display: none;
+  background-color: #333;
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+
+  li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      background-color: #444;
+    }
+  }
+}

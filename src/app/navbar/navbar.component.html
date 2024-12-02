@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a href="#">Univape</a>
+  </div>
+  <ul class="navbar-links">
+    <li><a routerLink="/">Accueil</a></li>
+    <li><a routerLink="/bet">Pariez</a></li>
+    <li><a routerLink="/contact">Contact</a></li>
+  </ul>
+  <div class="navbar-toggle" (click)="toggleMenu()">
+    ☰
+  </div>
+</nav>
+<ul class="navbar-dropdown" *ngIf="isMenuOpen">
+  <li><a routerLink="/">Accueil</a></li>
+  <li><a routerLink="/about">À propos</a></li>
+  <li><a routerLink="/contact">Contact</a></li>
+</ul>

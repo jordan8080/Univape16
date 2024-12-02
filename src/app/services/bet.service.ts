@@ -10,8 +10,8 @@ export class BetService {
 
   constructor(private http:HttpClient) { }
 
-  getData():Observable<Bet> {
-    return this.http.get<Bet>("http://localhost:8080/api/bet");
+  getBet():Observable<Bet[]> {
+    return this.http.get<Bet[]>("http://localhost:8080/api/bet");
   }
 
 }

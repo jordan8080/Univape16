@@ -1,4 +1,3 @@
-// bet.component.ts
 import { Component, OnInit } from '@angular/core';
 import { BetService } from "../../services/bet.service";
 import { Bet } from "./bet";
@@ -17,12 +16,15 @@ export class BetComponent implements OnInit {
   selectedCote: { [key: number]: string } = {};
   selectedBets: { [key: number]: number } = {};
 
+  showBetValidation = false; // To toggle the bet validation form
+  betAmount: number = 0; // To store the entered bet amount
+
   constructor(private betService: BetService) {}
 
   ngOnInit(): void {
-    this.betService.getData().subscribe((data) => {
-      /*this.betOptions = data;*/
-      console.log(this.betOptions);
+    this.betService.getBet().subscribe((data) => {
+      this.betOptions = data;
+      console.log(data);
     });
   }
 
@@ -39,5 +41,21 @@ export class BetComponent implements OnInit {
   calculateTotalCote(): number {
     const total = Object.values(this.selectedBets).reduce((total, cote) => total * cote, 1);
     return Math.ceil(total * 100) / 100;
+  }
+
+  // Calculate the potential winnings based on the bet amount and the total odds
+  calculatePotentialWinnings(): number {
+    const totalCote = this.calculateTotalCote();
+    return Math.ceil((totalCote * this.betAmount)*100) /100;
+  }
+
+  submitBet() {
+    if (this.betAmount > 0) {
+      console.log('Pari confirmé ! Montant:', this.betAmount, 'Cote totale:', this.calculateTotalCote());
+      // Add logic to save the bet or send it to the backend here
+      this.showBetValidation = false; // Hide the validation form after submission
+    } else {
+      alert("Veuillez entrer un montant valide.");
+    }
   }
 }

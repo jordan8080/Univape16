@@ -1,20 +1,29 @@
-<!-- bet.component.html -->
 <div class="bet-container">
   <h1>{{ title }}</h1>
   <p>{{ description }}</p>
 
   <div class="bet-list">
     <div *ngFor="let bet of betOptions" class="bet-item">
-      <h3>{{ bet.name }}</h3>
+      <h3 class="game">{{ bet.name }}</h3>
+      <h3 class="compete">{{ bet.competition }}</h3>
       <div class="cotes">
-        <button (click)="toggleCoteSelection(bet.id, 'cote1', bet.cote1)">
-          Cote 1: {{ bet.cote1 }}
+        <button
+          (click)="toggleCoteSelection(bet.id, 'cote1', bet.cote1)"
+          [ngClass]="{ selected: selectedCote[bet.id] === 'cote1' }"
+        >
+          1: {{ bet.cote1 }}
         </button>
-        <button (click)="toggleCoteSelection(bet.id, 'cote2', bet.cote2)">
-          Cote 2: {{ bet.cote2 }}
+        <button
+          (click)="toggleCoteSelection(bet.id, 'cote2', bet.cote2)"
+          [ngClass]="{ selected: selectedCote[bet.id] === 'cote2' }"
+        >
+          X: {{ bet.cote2 }}
         </button>
-        <button (click)="toggleCoteSelection(bet.id, 'cote3', bet.cote3)">
-          Cote 3: {{ bet.cote3 }}
+        <button
+          (click)="toggleCoteSelection(bet.id, 'cote3', bet.cote3)"
+          [ngClass]="{ selected: selectedCote[bet.id] === 'cote3' }"
+        >
+          2: {{ bet.cote3 }}
         </button>
       </div>
     </div>
@@ -22,5 +31,20 @@
 
   <div class="total-cote">
     <h4>Total Cote: {{ calculateTotalCote() }}</h4>
+  </div>
+
+  <!-- Button to validate the bet -->
+  <button (click)="showBetValidation = !showBetValidation" class="validate-bet-btn">
+    Validez Pari
+  </button>
+
+  <!-- Bet validation section -->
+  <div *ngIf="showBetValidation" class="bet-validation">
+    <h3>Valider votre pari</h3>
+    <p>Total des cotes sélectionnées : {{ calculateTotalCote() }}</p>
+    <label for="betAmount">Montant de votre pari :</label>
+    <input type="number" id="betAmount" [(ngModel)]="betAmount" placeholder="Entrez votre montant">
+    <p><strong>Votre gain potentiel : {{ calculatePotentialWinnings() }}</strong></p>
+    <button (click)="submitBet()">Confirmer le pari</button>
   </div>
 </div>

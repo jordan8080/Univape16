@@ -30,17 +30,15 @@ h1 {
 }
 
 button {
-  background-color: #007bff;
-  color: white;
+  background-color: lightgrey;
+  color: black;
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
+
 
 .bet-list {
   margin-top: 20px;
@@ -93,4 +91,57 @@ button:hover {
   margin-top: 20px;
   font-size: 1.5em;
   font-weight: bold;
+}
+
+.selected {
+  background-color: yellow;
+  font-weight: bold;
+}
+
+.validate-bet-btn {
+  margin-top: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.validate-bet-btn:hover {
+  background-color: #45a049;
+}
+
+.bet-validation {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.bet-validation input {
+  margin-top: 10px;
+  padding: 8px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.bet-validation button {
+  margin-top: 10px;
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.game{
+  font-weight: bold;
+}
+
+.compete{
+  font-weight: lighter;
 }
