@@ -18,7 +18,7 @@ export class BetComponent implements OnInit {
   selectedCote: { [key: number]: string } = {};
   selectedBets: { [key: number]: number } = {};
 
-  showBetValidation = false;
+  showBetValidation = true;
   betAmount: number = 0;
 
   constructor(private betService: BetService) {}
@@ -59,11 +59,12 @@ export class BetComponent implements OnInit {
   submitBet() {
     if (this.betAmount > 0) {
       console.log('Pari confirmé ! Montant:', this.betAmount, 'Cote totale:', this.calculateTotalCote());
-      // Add logic to save the bet or send it to the backend here
-      this.showBetValidation = false; // Hide the validation form after submission
+      this.showBetValidation = false;
+      //appeler service pour save
     } else {
       alert("Veuillez entrer un montant valide.");
     }
+
   }
 
   originalBetOptions: Bet[] = [];
@@ -74,7 +75,7 @@ export class BetComponent implements OnInit {
   }
 
   filterByLeague(): void {
-    if (this.selectedLeague) {
+    if (this.selectedLeague && this.selectedLeague !== 'Toutes les ligues') {
       this.betOptions = this.originalBetOptions.filter(
         (bet) => bet.competition === this.selectedLeague
       );
@@ -83,6 +84,9 @@ export class BetComponent implements OnInit {
     }
   }
 
+  getSelectedBets(): Bet[] {
+    return this.betOptions.filter((bet) => this.selectedCote[bet.id]);
+  }
 
 
 }

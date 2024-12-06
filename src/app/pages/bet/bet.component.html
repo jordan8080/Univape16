@@ -6,9 +6,8 @@
   <div class="search-league">
     <div class="dropdown-league">
       <select [(ngModel)]="selectedLeague" (change)="filterByLeague()">
-        <option value="" disabled selected>Choisissez votre ligue</option>
         <option *ngFor="let league of getUniqueLeagues()" [value]="league">
-          {{ league }}
+          <strong>{{ league }}</strong>
         </option>
       </select>
     </div>
@@ -61,6 +60,18 @@
 
   <div *ngIf="showBetValidation" class="bet-validation">
     <h3>Valider votre pari</h3>
+
+    <div class="selected-bets-summary">
+      <h4>Matchs sélectionnés :</h4>
+      <ul>
+        <li *ngFor="let bet of getSelectedBets()">
+          {{ bet.name }} -
+          <strong>{{ bet[selectedCote[bet.id]] }}</strong>
+        </li>
+      </ul>
+    </div>
+
+
     <p>Total des cotes sélectionnées : {{ calculateTotalCote() }}</p>
     <label for="betAmount">Montant de votre pari :</label>
     <input type="number" id="betAmount" [(ngModel)]="betAmount" placeholder="Entrez votre montant">
@@ -68,3 +79,4 @@
     <button (click)="submitBet()">Confirmer le pari</button>
   </div>
 </div>
+
