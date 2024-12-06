@@ -145,3 +145,57 @@ button {
 .compete{
   font-weight: lighter;
 }
+
+.search-league {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-league select {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.dropdown-league select:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.dropdown-league select option {
+  padding: 10px;
+}
+
+.validate-search .button-validate-search {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.validate-search .button-validate-search:hover {
+  background-color: #45a049;
+}
+
+.validate-search .button-validate-search:active {
+  background-color: #3e8e41;
+}

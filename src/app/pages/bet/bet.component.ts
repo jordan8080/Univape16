@@ -13,17 +13,24 @@ export class BetComponent implements OnInit {
 
   betOptions: Bet[] = [];
 
+  selectedLeague: string = '';
+
   selectedCote: { [key: number]: string } = {};
   selectedBets: { [key: number]: number } = {};
 
-  showBetValidation = false; // To toggle the bet validation form
-  betAmount: number = 0; // To store the entered bet amount
+  showBetValidation = false;
+  betAmount: number = 0;
 
   constructor(private betService: BetService) {}
 
   ngOnInit(): void {
     this.betService.getBet().subscribe((data) => {
       this.betOptions = data;
+      console.log(data);
+    });
+    this.betService.getBet().subscribe((data) => {
+      this.betOptions = data;
+      this.originalBetOptions = data;
       console.log(data);
     });
   }
@@ -58,4 +65,24 @@ export class BetComponent implements OnInit {
       alert("Veuillez entrer un montant valide.");
     }
   }
+
+  originalBetOptions: Bet[] = [];
+
+  getUniqueLeagues(): string[] {
+    const leagues = this.originalBetOptions.map((bet) => bet.competition);
+    return Array.from(new Set(leagues));
+  }
+
+  filterByLeague(): void {
+    if (this.selectedLeague) {
+      this.betOptions = this.originalBetOptions.filter(
+        (bet) => bet.competition === this.selectedLeague
+      );
+    } else {
+      this.betOptions = [...this.originalBetOptions];
+    }
+  }
+
+
+
 }

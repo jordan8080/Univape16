@@ -2,7 +2,27 @@
   <h1>{{ title }}</h1>
   <p>{{ description }}</p>
 
-  <div class="bet-list">
+  <!-- Section de recherche par ligue -->
+  <div class="search-league">
+    <div class="dropdown-league">
+      <select [(ngModel)]="selectedLeague" (change)="filterByLeague()">
+        <option value="" disabled selected>Choisissez votre ligue</option>
+        <option *ngFor="let league of getUniqueLeagues()" [value]="league">
+          {{ league }}
+        </option>
+      </select>
+    </div>
+    <div class="validate-search">
+      <button class="button-validate-search" (click)="filterByLeague()">OK</button>
+    </div>
+  </div>
+
+  <!-- Liste des paris -->
+  <div *ngIf="betOptions.length === 0">
+    Aucun pari disponible pour la ligue sélectionnée.
+  </div>
+
+  <div class="bet-list" *ngIf="betOptions.length > 0">
     <div *ngFor="let bet of betOptions" class="bet-item">
       <h3 class="game">{{ bet.name }}</h3>
       <h3 class="compete">{{ bet.competition }}</h3>
@@ -11,34 +31,34 @@
           (click)="toggleCoteSelection(bet.id, 'cote1', bet.cote1)"
           [ngClass]="{ selected: selectedCote[bet.id] === 'cote1' }"
         >
-          1: {{ bet.cote1 }}
+          1: <strong>{{ bet.cote1 }}</strong>
         </button>
         <button
           (click)="toggleCoteSelection(bet.id, 'cote2', bet.cote2)"
           [ngClass]="{ selected: selectedCote[bet.id] === 'cote2' }"
         >
-          X: {{ bet.cote2 }}
+          X: <strong>{{ bet.cote2 }}</strong>
         </button>
         <button
           (click)="toggleCoteSelection(bet.id, 'cote3', bet.cote3)"
           [ngClass]="{ selected: selectedCote[bet.id] === 'cote3' }"
         >
-          2: {{ bet.cote3 }}
+          2: <strong>{{ bet.cote3 }}</strong>
         </button>
       </div>
     </div>
   </div>
 
+  <!-- Total des cotes -->
   <div class="total-cote">
     <h4>Total Cote: {{ calculateTotalCote() }}</h4>
   </div>
 
-  <!-- Button to validate the bet -->
+  <!-- Validation du pari -->
   <button (click)="showBetValidation = !showBetValidation" class="validate-bet-btn">
     Validez Pari
   </button>
 
-  <!-- Bet validation section -->
   <div *ngIf="showBetValidation" class="bet-validation">
     <h3>Valider votre pari</h3>
     <p>Total des cotes sélectionnées : {{ calculateTotalCote() }}</p>
