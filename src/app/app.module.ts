@@ -7,6 +7,9 @@ import { BetComponent } from './pages/bet/bet.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { NavbarComponent } from './navbar/navbar.component';
 import {FormsModule} from "@angular/forms";
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+import { provideToastr } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import {FormsModule} from "@angular/forms";
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [provideAnimations(), // required animations providers
+    provideToastr()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BetService } from "../../services/bet.service";
 import { Bet } from "./bet";
+import { ToastrService } from 'ngx-toastr';
+import { firstValueFrom } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-bet',
@@ -21,7 +25,7 @@ export class BetComponent implements OnInit {
   showBetValidation = true;
   betAmount: number = 0;
 
-  constructor(private betService: BetService) {}
+  constructor(private betService: BetService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.betService.getBet().subscribe((data) => {
@@ -56,18 +60,31 @@ export class BetComponent implements OnInit {
     return Math.ceil((totalCote * this.betAmount)*100) /100;
   }
 
-  submitBet() {
-    if (this.betAmount > 0) {
-      console.log('Pari confirmé ! Montant:', this.betAmount, 'Cote totale:', this.calculateTotalCote());
+
+async submitBet() {
+  if (this.betAmount > 0) {
+    const betDetails = {
+      selectedBets: this.selectedBets,
+      betAmount: this.betAmount,
+      potentialWinnings: this.calculatePotentialWinnings(),
+    };
+
+    try {
+      const response = await firstValueFrom(this.betService.saveBet(betDetails));
+      console.log('Pari enregistré avec succès:', response);
       this.showBetValidation = false;
-      //appeler service pour save
-    } else {
-      alert("Veuillez entrer un montant valide.");
+      this.toastr.success('Pari Validé', 'Bonne chance !');
+    } catch (error) {
+      this.toastr.error('Erreur lors de l\'enregistrement', 'ERREUR');
     }
-
+  } else {
+    this.toastr.error('Valeur invalide', 'ERREUR');
   }
+}
 
-  originalBetOptions: Bet[] = [];
+
+
+originalBetOptions: Bet[] = [];
 
   getUniqueLeagues(): string[] {
     const leagues = this.originalBetOptions.map((bet) => bet.competition);
