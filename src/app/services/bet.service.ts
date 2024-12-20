@@ -20,13 +20,20 @@ export class BetService {
     selectedBets: { [key: number]: number };
     betAmount: number;
     potentialWinnings: number;
+    isWon: boolean;
+    idUser: number;
   }): Observable<any> {
     const payload = {
       selectedBets: betDetails.selectedBets,
       betAmount: betDetails.betAmount,
-      potentialWinnings: betDetails.potentialWinnings
+      potentialWinnings: betDetails.potentialWinnings,
+      isWon: false,
+      idUser: 14,
     };
 
-    return this.http.post<any>(`${this.apiUrl}/userbets`, payload);
+
+    return this.http.post<any>(`http://localhost:8080/api/userbets`, {
+      payload
+    });
   }
 }

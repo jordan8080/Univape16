@@ -61,17 +61,23 @@ export class BetComponent implements OnInit {
   }
 
 
-async submitBet() {
+ submitBet() {
   if (this.betAmount > 0) {
     const betDetails = {
       selectedBets: this.selectedBets,
       betAmount: this.betAmount,
       potentialWinnings: this.calculatePotentialWinnings(),
+      isWon: false,
+      idUser: 14,
     };
 
     try {
-      const response = await firstValueFrom(this.betService.saveBet(betDetails));
-      console.log('Pari enregistré avec succès:', response);
+
+      this.betService.saveBet(betDetails).subscribe((data)=>{
+        console.log(data)
+      })
+      //const response = firstValueFrom();
+      //console.log('Pari enregistré avec succès:', response);
       this.showBetValidation = false;
       this.toastr.success('Pari Validé', 'Bonne chance !');
     } catch (error) {
