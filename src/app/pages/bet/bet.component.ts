@@ -71,9 +71,17 @@ export class BetComponent implements OnInit {
       idUser: 14,
     };
 
+    const userbetDetails = {
+      id_bet: 1, // Par exemple, utiliser la première clé de selectedBets
+      id_user: betDetails.idUser,
+      cote: betDetails.selectedBets[1], // Récupérer une cote à partir de selectedBets
+      mise: betDetails.betAmount,
+      isWon: betDetails.isWon
+    };
+
     try {
 
-      this.betService.saveBet(betDetails).subscribe((data)=>{
+      this.betService.saveBet(userbetDetails).subscribe((data)=>{
         console.log(data)
       })
       //const response = firstValueFrom();
