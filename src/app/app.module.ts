@@ -4,12 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BetComponent } from './pages/bet/bet.component';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Ajouter ReactiveFormsModule pour le formulaire réactif
 import { provideAnimations } from '@angular/platform-browser/animations';
-
 import { provideToastr } from 'ngx-toastr';
+
+// Import des composants Register et Login
+import { LoginComponent } from './pages/login.component';
+import { RegisterComponent } from './pages/register.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +24,14 @@ import { provideToastr } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    LoginComponent,
+    RegisterComponent,
+    // Importer ReactiveFormsModule pour la gestion des formulaires réactifs
   ],
   providers: [provideAnimations(), // required animations providers
-    provideToastr()],
+    provideToastr()],             // Fournisseur pour Toastr
   bootstrap: [AppComponent]
 })
 export class AppModule { }
